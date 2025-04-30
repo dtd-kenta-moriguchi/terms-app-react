@@ -1,54 +1,52 @@
-# React + TypeScript + Vite
+# 用語管理アプリ (Chrome拡張機能)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 概要
+このプロジェクトはChrome拡張機能として動作する用語管理アプリです。ウェブページ上で特定の用語を検索・表示したり、用語集を管理する機能を提供します。
 
-Currently, two official plugins are available:
+主な機能:
+- バックグラウンドでのメッセージ処理
+- コンテンツスクリプトによる用語検索・表示
+- ポップアップ画面からの用語管理
+- TSV形式の用語データ管理
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 技術スタック
+- フロントエンド:
+  - React
+  - TypeScript
+  - Vite (ビルドツール)
+- スタイリング:
+  - CSS Modules
+- その他:
+  - Chrome Extension API
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 使い方
+1. 開発環境セットアップ:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. ビルド:
+```bash
+npm run build
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Chromeに拡張機能をロード:
+- Chromeで `chrome://extensions` を開く
+- "デベロッパーモード"を有効にする
+- "パッケージ化されていない拡張機能を読み込む"をクリック
+- `dist` ディレクトリを選択
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+4. 用語データの更新:
+- `public/defaultTerms.tsv` を編集して用語データを更新
+- TSV形式 (タブ区切り) で用語を管理
+
+## プロジェクト構成
+```
+src/
+├── background/    # バックグラウンドスクリプト
+├── content/       # コンテンツスクリプト
+├── popup/         # ポップアップ画面
+├── model/         # データモデル
+├── utils/         # ユーティリティ関数
+└── constants/     # 定数定義
 ```
