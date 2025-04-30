@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-const SettingsContainer = styled.div`
-  padding: 16px;
-`;
-
 const InfoText = styled.div`
   margin-bottom: 16px;
   font-size: 14px;
@@ -77,7 +73,7 @@ export const Settings = ({
   onFileUpload,
 }: SettingsProps) => {
   return (
-    <SettingsContainer>
+    <>
       <h2>設定</h2>
 
       <InfoText>
@@ -109,6 +105,6 @@ UX\tUser Experienceの略`}
           現在 <span>{termCount}</span> 件の用語が登録されています
         </TermCount>
       </StatContainer>
-    </SettingsContainer>
+    </>
   );
 };

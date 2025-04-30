@@ -1,6 +1,6 @@
 {
    "manifest_version": 3,
-   "name": "独自用語集検索ツール",
+   "name": "用語検索ツール",
    "version": "1.0.0",
    "permissions": [
       "storage"
@@ -10,8 +10,13 @@
    },
    "content_scripts": [
       {
-         "js": ["/assets/content.js"],
-         "matches": ["<all_urls>"]
+         "js": [
+            "/assets/content.js"
+         ],
+         // ドメインを指定して利用範囲を制限
+         "matches": [
+            "<all_urls>"
+         ]
       }
    ],
    "action": {

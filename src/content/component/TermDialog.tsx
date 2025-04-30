@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { forwardRef } from "react";
 
 const DialogContainer = styled.div`
   position: absolute;
@@ -49,18 +50,18 @@ interface TermDialogProps {
   onClose: () => void;
 }
 
-export const TermDialog = ({
+export const TermDialog = forwardRef<HTMLDivElement, TermDialogProps>(({
   visible,
   top,
   left,
   term,
   description,
   onClose,
-}: TermDialogProps) => {
+}, ref) => {
   if (!visible) return null;
 
   return (
-    <DialogContainer style={{ top, left }}>
+    <DialogContainer ref={ref} style={{ top, left }}>
       <DialogHeader>
         <DialogTitle>{term}</DialogTitle>
         <CloseButton onClick={onClose}>×</CloseButton>
@@ -70,4 +71,4 @@ export const TermDialog = ({
       </DialogContent>
     </DialogContainer>
   );
-};
+});

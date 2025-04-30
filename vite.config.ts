@@ -11,9 +11,6 @@ export default defineConfig({
       input: {
         popup: join(__dirname, "src/popup/index.html"),
       },
-      output: {
-        entryFileNames: "assets/[name].js",
-      },
     },
   },
   resolve: {
