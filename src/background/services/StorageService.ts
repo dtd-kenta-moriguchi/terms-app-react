@@ -9,11 +9,10 @@ export class StorageService {
   async initializeStorage(): Promise<void> {
     Logger.startSection("初期データ登録開始");
     try {
-      const storageService = new StorageService();
       const terms = await TsvParser.parseFromUrl(
         chrome.runtime.getURL(this.DEFAULT_TERMS_FILE_NAME)
       );
-      await storageService.saveTerms(terms);
+      await this.saveTerms(terms);
       Logger.info("用語データをストレージに保存しました");
     } catch (error) {
       Logger.error("用語データの読み込みに失敗しました", error as Error);
@@ -44,7 +43,7 @@ export class StorageService {
         if (chrome.runtime.lastError) {
           Logger.error(
             "ストレージ保存エラー:",
-            chrome.runtime.lastError as Error
+            new Error(chrome.runtime.lastError.message)
           );
           resolve(false);
         } else {
@@ -54,7 +53,7 @@ export class StorageService {
     });
   }
 
-  async getTerm(term: string): Promise<string | undefined> {
+  async getTermDescription(term: string): Promise<string | undefined> {
     const terms = await this.getTerms();
     return terms?.[term.toLowerCase()];
   }

@@ -52,7 +52,7 @@ export class MessageHandler {
     }
 
     Logger.info(`用語検索リクエスト: ${request.searchTerm}`);
-    const description = await this.storageService.getTerm(request.searchTerm);
+    const description = await this.storageService.getTermDescription(request.searchTerm);
     sendResponse({
       result: !!description,
       description: description || undefined,
