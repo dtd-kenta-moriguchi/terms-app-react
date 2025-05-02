@@ -62,7 +62,7 @@ export const useTermSearch = () => {
     (event: MouseEvent) => {
       if (
         dialogRef.current &&
-        !dialogRef.current.contains(event.target as Node)
+        !(dialogRef.current.contains(event.target as Node))
       ) {
         handleCloseDialog();
       }

@@ -1,15 +1,13 @@
-export type TermDictionary = Record<string, string>;
-
 export interface MessageResponse {
   result: boolean;
   description?: string;
   count?: number;
   error?: string;
-  terms?: TermDictionary;
+  terms?: Record<string, string>;
 }
 
 export interface MessageRequest {
   action: string;
   searchTerm?: string;
-  additionalTerms?: TermDictionary;
+  additionalTerms?: Record<string, string>;
 }

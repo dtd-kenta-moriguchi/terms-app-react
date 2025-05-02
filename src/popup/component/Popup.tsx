@@ -2,8 +2,8 @@ import { ChangeEvent } from "react";
 import { ToolExplanation } from "./ToolExplanation";
 import { TermSearch } from "./TermSearch";
 import { Settings } from "./Settings";
-import { usePopupTabs } from "../hooks/usePopupTabs";
 import { useTermManagement } from "../hooks/useTermManagement";
+import { TabTypes } from "../model/TabTypes";
 import {
   PopupContainer,
   TabContainer,
@@ -12,7 +12,6 @@ import {
 } from "./Popup.styles";
 
 export const Popup = () => {
-  const { activeTab, changeTab, TabTypes } = usePopupTabs();
   const {
     searchTerm,
     setSearchTerm,
@@ -21,6 +20,8 @@ export const Popup = () => {
     statusMessage,
     handleSearch,
     handleFileUpload,
+    activeTab,
+    setActiveTab,
   } = useTermManagement();
 
   const onFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,21 +34,21 @@ export const Popup = () => {
       <TabContainer>
         <TabButton
           className={activeTab === TabTypes.INFO ? "active" : ""}
-          onClick={() => changeTab(TabTypes.INFO)}
+          onClick={() => setActiveTab(TabTypes.INFO)}
           data-tab="info"
         >
           ツール説明
         </TabButton>
         <TabButton
           className={activeTab === TabTypes.SEARCH ? "active" : ""}
-          onClick={() => changeTab(TabTypes.SEARCH)}
+          onClick={() => setActiveTab(TabTypes.SEARCH)}
           data-tab="search"
         >
           用語検索
         </TabButton>
         <TabButton
           className={activeTab === TabTypes.SETTINGS ? "active" : ""}
-          onClick={() => changeTab(TabTypes.SETTINGS)}
+          onClick={() => setActiveTab(TabTypes.SETTINGS)}
           data-tab="settings"
         >
           設定

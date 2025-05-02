@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Term } from "../../model/Term";
+import { Term } from "../model/Term";
 
 interface TermSearchProps {
   searchTerm: string;

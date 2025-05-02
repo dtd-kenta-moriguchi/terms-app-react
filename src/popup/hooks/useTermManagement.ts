@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { ActionTypes } from "../../constants/ActionTypes";
-import { Term } from "../../model/Term";
+import { Term } from "../model/Term";
+import { TabTypes } from "../model/TabTypes";
+import { TsvParser } from "../service/TsvParser";
 
 export const useTermManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -8,8 +10,9 @@ export const useTermManagement = () => {
   const [termCount, setTermCount] = useState(0);
   const [statusMessage, setStatusMessage] = useState("");
   const [terms, setTerms] = useState<Record<string, string>>({});
+  const [activeTab, setActiveTab] = useState<TabTypes>(TabTypes.INFO);
 
-  // 用語数を更新
+  // 用語を更新
   const loadTerms = useCallback(() => {
     chrome.runtime.sendMessage(
       { action: ActionTypes.GET_ALL_TERMS },
@@ -45,17 +48,7 @@ export const useTermManagement = () => {
       reader.onload = (event: ProgressEvent<FileReader>) => {
         if (!event.target?.result || typeof event.target.result !== "string")
           return;
-
-        const additionalTermsData: Record<string, string> = {};
-        event.target.result.split("\n").forEach((line) => {
-          if (line) {
-            const [term, description] = line.split("\t");
-            if (term && description) {
-              additionalTermsData[term.toLowerCase()] = description;
-            }
-          }
-        });
-
+        const additionalTermsData: Record<string, string> = TsvParser.parse(event.target.result);
         chrome.runtime.sendMessage(
           {
             action: ActionTypes.ADD_TERMS,
@@ -81,5 +74,7 @@ export const useTermManagement = () => {
     statusMessage,
     handleSearch,
     handleFileUpload,
+    activeTab,
+    setActiveTab
   };
 };
