@@ -1,6 +1,7 @@
 import { TermDictionary } from "../types";
 import { Logger } from "../../utils/logger";
 import { TsvParser } from "./TsvParser";
+import { WebPageParser } from "./WebPageParser";
 
 export class StorageService {
   private readonly STORAGE_KEY = "termsData";
@@ -12,7 +13,11 @@ export class StorageService {
       const terms = await TsvParser.parseFromUrl(
         chrome.runtime.getURL(this.DEFAULT_TERMS_FILE_NAME)
       );
+      const terms2 = await WebPageParser.parseFromUrl(
+        "https://nakaikenta.atlassian.net/wiki/rest/api/content/196614?expand=body.storage"
+      );
       await this.saveTerms(terms);
+      await this.addTerms(terms2);
       Logger.info("用語データをストレージに保存しました");
     } catch (error) {
       Logger.error("用語データの読み込みに失敗しました", error as Error);

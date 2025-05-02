@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/chrome": "^0.0.317",
     "@types/node": "^22.15.2",
+    "cheerio": "^1.0.0",
     "concurrently": "^9.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
