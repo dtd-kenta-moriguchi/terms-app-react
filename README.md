@@ -46,7 +46,7 @@ src/
 ├── background/    # バックグラウンドスクリプト
 ├── content/       # コンテンツスクリプト
 ├── popup/         # ポップアップ画面
-├── model/         # データモデル
+├── config/        # コンフィグファイル
 ├── utils/         # ユーティリティ関数
 └── constants/     # 定数定義
 ```
