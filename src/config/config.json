@@ -1,0 +1,10 @@
+{
+    "term": {
+        "web": {
+            "page_url": "https://tickets.tools.misumi.jp/confluence/pages/viewpage.action?pageId=28955445",
+            "api_url": "https://tickets.tools.misumi.jp/confluence/rest/api/content/28955445?expand=body.storage",
+            "keyColumnNumber": 1,
+            "descriptionColumnNumber": 4
+        }
+    }
+}

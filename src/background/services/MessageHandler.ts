@@ -16,7 +16,6 @@ export class MessageHandler {
     _sender: chrome.runtime.MessageSender,
     sendResponse: (response?: MessageResponse) => void
   ): boolean {
-    // 非同期処理を即時実行関数でラップ
     (async () => {
       try {
         switch (request.action) {

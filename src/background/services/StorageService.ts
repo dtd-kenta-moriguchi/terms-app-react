@@ -1,20 +1,18 @@
 import { Logger } from "../../utils/logger";
-import { WebPageParser } from "./WebPageParser";
+import { TermProvider } from "./TermProvider";
 
 export class StorageService {
   private readonly STORAGE_KEY = "termsData";
-  private readonly TERM_WEBPAGE_URL = "https://tickets.tools.misumi.jp/confluence/rest/api/content/28955445?expand=body.storage"
-  private readonly TERM_KEY_COLUMN_NUMBER = 1;
-  private readonly TERM_DESCRIPTION_COLUMN_NUMBER = 4;
+  private termProvider: TermProvider;
+
+  constructor() {
+    this.termProvider = new TermProvider();
+  }
 
   async initializeStorage(): Promise<void> {
     Logger.startSection("初期データ登録開始");
     try {
-      const terms = await WebPageParser.parseFromUrl(
-        this.TERM_WEBPAGE_URL,
-        this.TERM_KEY_COLUMN_NUMBER,
-        this.TERM_DESCRIPTION_COLUMN_NUMBER
-      );
+      const terms = await this.termProvider.getTermsFromWeb();
       await this.saveTerms(terms);
       Logger.info("用語データをストレージに保存しました");
     } catch (error) {

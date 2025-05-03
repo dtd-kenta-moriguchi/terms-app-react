@@ -1,20 +1,6 @@
 export class WebPageParser {
 
-  static async parseFromUrl(
-    url: string,
-    termKeyNumber: number,
-    termDescriptionNumber: number
-  ): Promise<Record<string, string>> {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Webページの読み込みに失敗: ${response.status}`);
-    }
-
-    const html = await response.text();
-    return this.parse(html, termKeyNumber, termDescriptionNumber);
-  }
-
-  private static parse(
+  static parse(
     html: string,
     termKeyNumber: number,
     termDescriptionNumber: number
