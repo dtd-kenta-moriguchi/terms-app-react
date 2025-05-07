@@ -1,7 +1,20 @@
-import { MessageRequest, MessageResponse } from "../types";
 import { StorageService } from "./StorageService";
 import { Logger } from "../../utils/logger";
 import { ActionTypes } from "../../constants/ActionTypes";
+
+export interface MessageResponse {
+  result: boolean;
+  description?: string;
+  count?: number;
+  error?: string;
+  terms?: Record<string, string>;
+}
+
+export interface MessageRequest {
+  action: string;
+  searchTerm?: string;
+  additionalTerms?: Record<string, string>;
+}
 
 export class MessageHandler {
   private storageService: StorageService;

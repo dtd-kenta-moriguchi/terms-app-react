@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useRef } from "react";
 import { ActionTypes } from "../../constants/ActionTypes";
 import { Logger } from "../../utils/logger";
 
@@ -70,15 +70,6 @@ export const useTermSearch = () => {
     [handleCloseDialog]
   );
 
-  useEffect(() => {
-    if (showTermDialog) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }
-  }, [showTermDialog, handleClickOutside]);
-
   return {
     dialogRef,
     displayPosition,
@@ -89,5 +80,6 @@ export const useTermSearch = () => {
     handleTextSelection,
     handleSearchButtonClick,
     handleCloseDialog,
+    handleClickOutside
   };
 };

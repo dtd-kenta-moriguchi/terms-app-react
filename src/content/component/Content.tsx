@@ -14,12 +14,23 @@ export const Content = () => {
     handleTextSelection,
     handleSearchButtonClick,
     handleCloseDialog,
+    handleClickOutside,
   } = useTermSearch();
 
   useEffect(() => {
     document.addEventListener("mouseup", handleTextSelection);
     return () => document.removeEventListener("mouseup", handleTextSelection);
   }, [handleTextSelection]);
+
+
+  useEffect(() => {
+    if (showTermDialog) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [showTermDialog, handleClickOutside]);
 
   return (
     <>
